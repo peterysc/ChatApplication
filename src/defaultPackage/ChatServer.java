@@ -37,11 +37,23 @@ class ConversationHandler extends Thread{
 	// this socket is for conversation handler
 	Socket socket;
 	BufferedReader in;
+	// useful for writing it to the socket's outputstream
 	PrintWriter out;
 	String name;
+	// will be used for writing data to our file
+	PrintWriter pw;
+	static FileWriter fw;
+	static BufferedWriter bw;
 	
 	public ConversationHandler(Socket socket) throws IOException{
 		this.socket = socket;
+		// true is for not clearing the current content of the file every time the file is accessed
+		fw = new FileWriter("chatLogs/chatLog.txt",true);
+		// in order to write an entire string at time, we utilize BufferedWriter
+		bw = new BufferedWriter(fw);
+		// writes the data to our file
+		// true is for auto-flush
+		pw = new PrintWriter(bw,true);
 	}
 	
 	public void run(){
@@ -90,6 +102,8 @@ class ConversationHandler extends Thread{
 					return;
 				}
 				
+				// sending the message to the chat-log file along with the user's name
+				pw.println(name + ":" + message);
 				for(PrintWriter writer : ChatServer.printWriters){
 					writer.println(name + ": " + message);
 				}

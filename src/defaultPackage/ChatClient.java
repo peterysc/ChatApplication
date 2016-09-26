@@ -112,7 +112,7 @@ public class ChatClient {
 			}else if(str.startsWith("NAMEACCEPTED")){
 				// user log in confirmed - now can send text
 				textField.setEditable(true);
-				// flow 7 - displays the name who recently joined on the chat 
+				// flow 7 - displays the name of the user on top of the chatbox
 				nameLabel.setText("You are logged in as: " + str.substring(12));
 				
 			}else{
