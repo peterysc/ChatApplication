@@ -113,6 +113,7 @@ public class ChatClient {
 				// user log in confirmed - now can send text
 				textField.setEditable(true);
 				// flow 7 - displays the name who recently joined on the chat 
+				nameLabel.setText("You are logged in as: " + str.substring(12));
 				
 			}else{
 				// normal chat message recognition
